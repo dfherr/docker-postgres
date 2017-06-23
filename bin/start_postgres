@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Paths to things
+DATADIR=/postgres/data
+
+# Lazily initialize database if needed
+if [[ ! -f $DATADIR/PG_VERSION ]]
+then
+  # Initialize the data directory
+  if [[ -d $DATADIR ]]; then
+    sudo chown postgres: $DATADIR
+  fi
+  initdb $DATADIR -U postgres -E UTF8
+
+  # Apply minimal configuration
+  cp -f /usr/local/etc/postgres/*.conf $DATADIR/
+
+  # Set up default databases etc
+  cat /usr/local/scripts/init.sql | postgres \
+    --single -D $DATADIR postgres
+fi
+
+# Run postgres in the foreground
+exec postgres -D $DATADIR
