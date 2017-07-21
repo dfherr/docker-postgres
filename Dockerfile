@@ -5,10 +5,13 @@ ENV PG_VER 9.6.3
 ENV PG_DIR postgresql-$PG_VER
 ENV PG_PKG $PG_DIR.tar.bz2
 
-RUN sudo apt-get install -y \
-                          pv \
-                          libreadline6-dev \
-                          zlib1g-dev
+RUN sudo apt-get update -qq -y && \
+    sudo apt-get install -y \
+    pv \
+    libreadline6-dev \
+    zlib1g-dev; \
+    sudo rm -rf /var/lib/apt/lists/*; \
+    sudo rm -rf /var/cache/apt/*;
 
 RUN cd /tmp;                                                        \
     curl -LO http://ftp.postgresql.org/pub/source/v$PG_VER/$PG_PKG; \
