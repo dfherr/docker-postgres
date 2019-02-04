@@ -1,7 +1,7 @@
 FROM dfherr/ubuntu:16.04
 MAINTAINER Dennis-Florian Herr <herrdeflo@gmail.com>
 
-ENV PG_VER 9.6.3
+ENV PG_VER 11.1
 ENV PG_DIR postgresql-$PG_VER
 ENV PG_PKG $PG_DIR.tar.bz2
 

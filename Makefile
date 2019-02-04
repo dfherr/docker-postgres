@@ -1,5 +1,5 @@
 REPO ?= dfherr/postgres
-TAG  ?= 9.6.3
+TAG  ?= 11.1
 
 all: build push
 
